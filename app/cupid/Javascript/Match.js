@@ -15,7 +15,7 @@ $(document).ready(function(){
   readyToMatch=true;//Set to true for now. If false, we cannot click the match button. That means either we have not received a new match yet or we're in animation stage.
 
   //css auto-adjust according to the screen size
-  scr_height = $(window).height();
+  scr_height = $(window).height() - 44;
   scr_width = $(window).width();
   // div_height = $('.match-page').height();
   // div_width = $('.match-page').width();
@@ -32,7 +32,7 @@ $(document).ready(function(){
   $(".user_name").css("width", scr_width * 0.5 * 0.25);
   $(".btn-select").css("height", scr_width * 0.5 * 0.75 * 0.5);
   $(".btn-select").css("width", scr_width * 0.5 * 0.75 * 0.5);
-  $("#selection_part").css("margin-top", scr_height * 0.1);
+  $("#selection_part").css("margin-top", scr_height * 0.02);
   $(".div-hidden").css("height", scr_height);
   $(".div-hidden").css("width", scr_width);
   $(".div-hidden").css("z-index", 999);
@@ -120,6 +120,7 @@ $(document).ready(function(){
         // When the animation completes, make it fade away
         $('.heart').fadeTo( "slow", 0.00 ); //.fadeTo( duration, opacity [, complete ] )
         $('.div-hidden').fadeTo("slow", 0.00);
+        $('.div-hidden').css("display", "none");
         readyToMatch=true;
       }else{
         if (times_run==0){
