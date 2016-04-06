@@ -12,6 +12,7 @@ $(document).ready(function(){
   match_id = "";
   vote = false;
   MyMatchPage = "";
+  readyToMatch=true;//Set to true for now. If false, we cannot click the match button. That means either we have not received a new match yet or we're in animation stage.
 
   //css auto-adjust according to the screen size
   scr_height = $(window).height();
@@ -71,9 +72,16 @@ $(document).ready(function(){
   });
 
   $(".btn-checkmark").click(function(){
-    $(".div-hidden").show();
-    $(".div-hidden").css("background-color", "rgba(0,152,50,0.7)");
-    animateHeart();
+    if (readyToMatch){
+      // switch readyToMatch to false so that user cannot double click the same button
+      readyToMatch=false;
+      // change the html to show the name of the two matches. Change it to first name later
+      $(".heart").html(user_name_1+'<span style="font-size: 75px; color: red;">&hearts;</span>'+user_name_2);
+      //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
+      //$(".div-hidden").css("background-color", "rgba(0,152,50,0.7)");
+      $(".div-hidden").show();
+      animateHeart(0);
+    }
   });
 
   $(".view-result").click(function(){
@@ -105,10 +113,22 @@ $(document).ready(function(){
     }
   }
 
-  function animateHeart() {
+  function animateHeart(times_run) {
     $('.heart span').animate({
         fontSize: $('.heart span').css('font-size') == '75px' ? '50px' : '75px'
-    }, 500, animateHeart);
+    }, 500, function(){
+      if (times_run>6){
+        // When the animation completes, make it fade away
+        $('.heart').fadeTo( "slow", 0.00 ); //.fadeTo( duration, opacity [, complete ] )
+        readyToMatch=true;
+      }else{
+        if (times_run==0){
+          $('.heart').fadeTo( "fast", 1.00 ); //.fadeTo( duration, opacity [, complete ] )
+        }
+        animateHeart(times_run+1);
+      }
+      
+    });
   }
 
 })
