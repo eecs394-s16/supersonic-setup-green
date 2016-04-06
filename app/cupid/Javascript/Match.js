@@ -24,7 +24,6 @@ $(document).ready(function(){
   // $(".div-overlap").css("height", "100%");
   // $(".div-overlap").css("width", scr_width);
   // $(".match_space").css("margin-top", scr_height * 0.05);
-  $(".match-page").blur();
   $(".person_frame").css("height", scr_width * 0.6);
   $(".person_frame").css("width", scr_width * 0.5);
   $(".user_pic").css("height", scr_width * 0.5 * 0.70);
@@ -78,7 +77,7 @@ $(document).ready(function(){
       // change the html to show the name of the two matches. Change it to first name later
       $(".heart").html(user_name_1+'<span style="font-size: 75px; color: red;">&hearts;</span>'+user_name_2);
       //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
-      //$(".div-hidden").css("background-color", "rgba(0,152,50,0.7)");
+      $(".div-hidden").css("background-color", "rgba(0,152,50,0.7)");
       $(".div-hidden").show();
       animateHeart(0);
     }
@@ -120,14 +119,16 @@ $(document).ready(function(){
       if (times_run>6){
         // When the animation completes, make it fade away
         $('.heart').fadeTo( "slow", 0.00 ); //.fadeTo( duration, opacity [, complete ] )
+        $('.div-hidden').fadeTo("slow", 0.00);
         readyToMatch=true;
       }else{
         if (times_run==0){
           $('.heart').fadeTo( "fast", 1.00 ); //.fadeTo( duration, opacity [, complete ] )
+          $('.div-hidden').fadeTo("fast", 1.00);
         }
         animateHeart(times_run+1);
       }
-      
+
     });
   }
 
