@@ -16,8 +16,12 @@ $(document).ready(function(){
   //css auto-adjust according to the screen size
   scr_height = $(window).height();
   scr_width = $(window).width();
-  $(".div-overlap").css("height", scr_width * 0.6);
-  $(".div-overlap").css("width", scr_width * 0.95);
+  // div_height = $('.match-page').height();
+  // div_width = $('.match-page').width();
+  // alert(div_height);
+  // alert(div_width);
+  // $(".div-overlap").css("height", "100%");
+  // $(".div-overlap").css("width", scr_width);
   // $(".match_space").css("margin-top", scr_height * 0.05);
   $(".person_frame").css("height", scr_width * 0.6);
   $(".person_frame").css("width", scr_width * 0.5);
@@ -28,10 +32,13 @@ $(document).ready(function(){
   $(".btn-select").css("height", scr_width * 0.5 * 0.75 * 0.5);
   $(".btn-select").css("width", scr_width * 0.5 * 0.75 * 0.5);
   $("#selection_part").css("margin-top", scr_height * 0.1);
+  $(".div-hidden").css("height", scr_height);
   $(".div-hidden").css("z-index", 999);
   $(".div-hidden").css("display", "none");
   $(".div-hidden").css("position", "relative");
-  $(".div-hidden").css("bottom", scr_width * 0.6)
+  $(".div-hidden").css("bottom", scr_height);
+  // $(".div-hidden").css("margin-top", scr_height);
+  $(".heart").css("margin-top", scr_height * 0.5 * 0.8);
 
   //receive the first data from the server
 
@@ -61,6 +68,7 @@ $(document).ready(function(){
 
   $(".btn-checkmark").click(function(){
     $(".div-hidden").show();
+    $(".div-hidden").css("background-color", "rgba(0,152,50,0.7)");
     animateHeart();
   });
 

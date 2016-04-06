@@ -4,6 +4,10 @@
   font-weight: 600;
 }
 
+html {
+  overflow: hidden;
+}
+
 .Title {
   text-align: center;
 }
@@ -15,7 +19,10 @@
 .heart {
   font-size: 30px;
   text-align: center;
-  margin-top: 50px;
+}
+
+.div-col-heart {
+  text-align: center;
 }
 
 .btn-mymatch {
