@@ -75,9 +75,9 @@ $(document).ready(function(){
       // switch readyToMatch to false so that user cannot double click the same button
       readyToMatch=false;
       // change the html to show the name of the two matches. Change it to first name later
-      $(".heart").html(user_name_1+'<span style="font-size: 75px; color: red;">&hearts;</span>'+user_name_2);
+      $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
       //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
-      $(".div-hidden").css("background-color", "rgba(0,152,50,0.7)");
+      $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
       $(".div-hidden").show();
       animateHeart(0);
     }
