@@ -23,6 +23,7 @@ $(document).ready(function(){
   // $(".div-overlap").css("height", "100%");
   // $(".div-overlap").css("width", scr_width);
   // $(".match_space").css("margin-top", scr_height * 0.05);
+  $(".match-page").blur();
   $(".person_frame").css("height", scr_width * 0.6);
   $(".person_frame").css("width", scr_width * 0.5);
   $(".user_pic").css("height", scr_width * 0.5 * 0.70);
@@ -33,10 +34,13 @@ $(document).ready(function(){
   $(".btn-select").css("width", scr_width * 0.5 * 0.75 * 0.5);
   $("#selection_part").css("margin-top", scr_height * 0.1);
   $(".div-hidden").css("height", scr_height);
+  $(".div-hidden").css("width", scr_width);
   $(".div-hidden").css("z-index", 999);
   $(".div-hidden").css("display", "none");
-  $(".div-hidden").css("position", "relative");
-  $(".div-hidden").css("bottom", scr_height);
+  $(".div-hidden").css("position", "absolute");
+  $(".div-hidden").css("top", 0);
+  // $(".div-hidden").css("left", 0);
+  // $(".div-hidden").css("bottom", scr_height);
   // $(".div-hidden").css("margin-top", scr_height);
   $(".heart").css("margin-top", scr_height * 0.5 * 0.8);
 
