@@ -72,19 +72,19 @@ $(document).ready(function(){
 
   $(".btn-checkmark").click(function(){
     if (readyToMatch){
+      SeeMyMatch();
 
-
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if(xhr.readyState ==  XMLHttpRequest.DONE && xhr.status == 200) {
-            alert(xhr.responseText);
-        }else{
-          alert('something bad happened');
-          alert('xhr.status: '+xhr.status);
-        }
-      }
-      xhr.open('GET', 'http://localhost:3000/match/hi', true);
-      xhr.send(null);
+      // var xhr = new XMLHttpRequest();
+      // xhr.onreadystatechange = function() {
+      //   if(xhr.readyState ==  XMLHttpRequest.DONE && xhr.status == 200) {
+      //       alert(xhr.responseText);
+      //   }else{
+      //     alert('something bad happened');
+      //     alert('xhr.status: '+xhr.status);
+      //   }
+      // }
+      // xhr.open('GET', 'http://localhost:3000/match/hi', true);
+      // xhr.send(null);
       // $.post( "http://localhost:3000/api/hi", function( data ) {
       //   $( ".div-hidden" ).html('random shit');
       //   alert( "Load was performed." );
@@ -92,13 +92,13 @@ $(document).ready(function(){
 
 
       // switch readyToMatch to false so that user cannot double click the same button
-      readyToMatch=false;
-      // change the html to show the name of the two matches. Change it to first name later
-      $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
-      //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
-      $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
-      $(".div-hidden").show();
-      animateHeart(0);
+      // readyToMatch=false;
+      // // change the html to show the name of the two matches. Change it to first name later
+      // $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
+      // //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
+      // $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
+      // $(".div-hidden").show();
+      // animateHeart(0);
     }
   });
 
@@ -115,15 +115,72 @@ $(document).ready(function(){
   }
 
   function SeeMyMatch() {
-    usr_data = {'usr_id': cur_usr_id, 'usr_name': cur_usr_name};
+    usr_data = {'usr_id': 1, 'match_id': false, 'yes': true};
+    usr_data = JSON.stringify(usr_data);
+    // alert("h");
     $.ajax({
       type: "POST",
-      dataType: "JSON",
-      url: MyMatchPage,
+      contentType: "application/json",
+      dataType: "json",
+      url: "http://loveisintheair.herokuapp.com/api/match",
       data: usr_data,
-      success: page_redirect(res)
+      error: function(er) {
+        var keys = Object.keys(er);
+        alert(keys);
+        // console.log(er);
+        alert(er['error']);
+        alert(er['getAllResponseHeaders']);
+        alert(er['status']);
+      },
+      success: function(data) {
+        // alert("yes");
+        doanimation(data);
+        var keys = Object.keys(data);
+        // alert(keys);
+        // var receivedData = JSON.parse(data);
+        // alert(receivedData);
+      //   received_user_id=data['user_id'];
+      //   match_id=data['match_id'];
+      //   user_name_1=data['users'][0]['name'];//full name string
+      //   user_img_1=data['users'][0]['profile_picture'];// profile picture url
+      //   user_name_2=data['users'][1]['name'];
+      //   user_img_2=data['users'][1]['profile_picture'];
+		  //  // Do something with the user_id and Match ID. Wait for the next user input.
+      // //  alert(user_name_1);
+      // //  alert("yes");
+			//   refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2);
+        // alert(data['sup']);
+      }
     });
   }
+
+  function refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2){
+    $(".user_img_1").attr("src", user_img_1);
+    $(".user_img_2").attr("src", user_img_2);
+    $(".user_name_1").html(user_name_1);
+    $(".user_name_2").html(user_name_2);
+  }
+
+  function doanimation (data) {
+    readyToMatch=false;
+    // change the html to show the name of the two matches. Change it to first name later
+    $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
+    //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
+    $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
+    $(".div-hidden").show();
+    // alert(data);
+    animateHeart(0, data);
+  }
+  // function SeeMyMatch() {
+  //   usr_data = {'usr_id': cur_usr_id, 'usr_name': cur_usr_name};
+  //   $.ajax({
+  //     type: "POST",
+  //     dataType: "JSON",
+  //     url: MyMatchPage,
+  //     data: usr_data,
+  //     success: page_redirect(res)
+  //   });
+  // }
 
   function page_redirect(res) {
     if (res.status == 'success') {
@@ -131,22 +188,33 @@ $(document).ready(function(){
     }
   }
 
-  function animateHeart(times_run) {
+  function animateHeart(times_run, data) {
+    // alert(data);
     $('.heart span').animate({
         fontSize: $('.heart span').css('font-size') == '75px' ? '50px' : '75px'
     }, 500, function(){
-      if (times_run>6){
+      if (times_run>3){
         // When the animation completes, make it fade away
         $('.heart').fadeTo( "slow", 0.00 ); //.fadeTo( duration, opacity [, complete ] )
         $('.div-hidden').fadeTo("slow", 0.00);
         $('.div-hidden').css("display", "none");
         readyToMatch=true;
+        received_user_id=data['user_id'];
+        match_id=data['match_id'];
+        user_name_1=data['users'][0]['name'];//full name string
+        user_img_1=data['users'][0]['profile_picture'];// profile picture url
+        user_name_2=data['users'][1]['name'];
+        user_img_2=data['users'][1]['profile_picture'];
+		   // Do something with the user_id and Match ID. Wait for the next user input.
+      //  alert(user_name_1);
+      //  alert("yes");
+			  refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2);
       }else{
         if (times_run==0){
           $('.heart').fadeTo( "fast", 1.00 ); //.fadeTo( duration, opacity [, complete ] )
           $('.div-hidden').fadeTo("fast", 1.00);
         }
-        animateHeart(times_run+1);
+        animateHeart(times_run+1, data);
       }
 
     });
