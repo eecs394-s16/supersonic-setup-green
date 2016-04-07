@@ -72,6 +72,25 @@ $(document).ready(function(){
 
   $(".btn-checkmark").click(function(){
     if (readyToMatch){
+
+
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if(xhr.readyState ==  XMLHttpRequest.DONE && xhr.status == 200) {
+            alert(xhr.responseText);
+        }else{
+          alert('something bad happened');
+          alert('xhr.status: '+xhr.status);
+        }
+      }
+      xhr.open('GET', 'http://localhost:3000/match/hi', true);
+      xhr.send(null);
+      // $.post( "http://localhost:3000/api/hi", function( data ) {
+      //   $( ".div-hidden" ).html('random shit');
+      //   alert( "Load was performed." );
+      // });
+
+
       // switch readyToMatch to false so that user cannot double click the same button
       readyToMatch=false;
       // change the html to show the name of the two matches. Change it to first name later
