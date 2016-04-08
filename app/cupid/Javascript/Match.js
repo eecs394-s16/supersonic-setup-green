@@ -48,9 +48,9 @@ $(document).ready(function(){
 
   user_img_1 = "/icons/pig1.jpg";
   user_img_2 = "/icons/pig2.jpg";
-  user_name_1 = "1";
-  user_name_2 = "2";
-  cur_usr_name = "hah";
+  user_name_1 = "Noura Li";
+  user_name_2 = "John Smith";
+  cur_usr_name = "Collin";
   $(".user_img_1").attr("src", user_img_1);
   $(".user_img_2").attr("src", user_img_2);
   $(".user_name_1").html(user_name_1);
@@ -67,7 +67,42 @@ $(document).ready(function(){
   });
 
   $(".btn-close").click(function(){
-
+    usr_data = {'usr_id': 1, 'match_id': false, 'yes': true};
+    usr_data = JSON.stringify(usr_data);
+    // alert("h");
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      dataType: "json",
+      url: "http://loveisintheair.herokuapp.com/api/match",
+      data: usr_data,
+      error: function(er) {
+        var keys = Object.keys(er);
+        alert(keys);
+        // console.log(er);
+        alert(er['error']);
+        alert(er['getAllResponseHeaders']);
+        alert(er['status']);
+      },
+      success: function(data) {
+        // alert("yes");
+        var keys = Object.keys(data);
+        // alert(keys);
+        // var receivedData = JSON.parse(data);
+        // alert(receivedData);
+        cur_usr_id=data['user_id'];
+        match_id=data['match_id'];
+        user_name_1=data['users'][0]['name'];//full name string
+        user_img_1=data['users'][0]['profile_picture'];// profile picture url
+        user_name_2=data['users'][1]['name'];
+        user_img_2=data['users'][1]['profile_picture'];
+		  //  // Do something with the user_id and Match ID. Wait for the next user input.
+      // //  alert(user_name_1);
+      // //  alert("yes");
+			  refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2);
+        // alert(data['sup']);
+      }
+    });
   });
 
   $(".btn-checkmark").click(function(){
@@ -159,6 +194,7 @@ $(document).ready(function(){
     $(".user_img_2").attr("src", user_img_2);
     $(".user_name_1").html(user_name_1);
     $(".user_name_2").html(user_name_2);
+    $(".cur_usr_name").html(cur_usr_name);
   }
 
   function doanimation (data) {
@@ -199,7 +235,7 @@ $(document).ready(function(){
         $('.div-hidden').fadeTo("slow", 0.00);
         $('.div-hidden').css("display", "none");
         readyToMatch=true;
-        received_user_id=data['user_id'];
+        cur_usr_id=data['user_id'];
         match_id=data['match_id'];
         user_name_1=data['users'][0]['name'];//full name string
         user_img_1=data['users'][0]['profile_picture'];// profile picture url

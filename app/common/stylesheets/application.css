@@ -99,6 +99,10 @@ button.btn-select {
   text-align: center;
 }
 
-.choice {
-  text-align: center;
+.choice-close {
+  text-align: right;
+}
+
+.choice-checkmark {
+  text-align: left;
 }
