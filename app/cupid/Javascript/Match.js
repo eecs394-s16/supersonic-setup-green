@@ -1,4 +1,13 @@
 $(document).ready(function(){
+  // Disable orientation change. 
+  // $( window ).orientationchange();
+  // $.mobile.orientationChangeEnabled = false;
+  $( window ).on( "orientationchange", function( event ) {
+    // alerts twice. Probably because the script is loaded multiple times.
+    if (window.orientation!="0"){
+      alert( "The app may not work in landscape mode. Please change back to portrait mode." );
+    }
+  });
 
   //user data
   cur_usr_name = "";
