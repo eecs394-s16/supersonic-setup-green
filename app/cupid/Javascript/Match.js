@@ -1,13 +1,4 @@
 $(document).ready(function(){
-  // Disable orientation change. 
-  // $( window ).orientationchange();
-  // $.mobile.orientationChangeEnabled = false;
-  $( window ).on( "orientationchange", function( event ) {
-    // alerts twice. Probably because the script is loaded multiple times.
-    if (window.orientation!="0"){
-      alert( "The app may not work in landscape mode. Please change back to portrait mode." );
-    }
-  });
 
   //user data
   cur_usr_name = "";
@@ -52,9 +43,6 @@ $(document).ready(function(){
   // $(".div-hidden").css("bottom", scr_height);
   // $(".div-hidden").css("margin-top", scr_height);
   $(".heart").css("margin-top", scr_height * 0.5 * 0.8);
-  // $(".heart_usr_1").css("margin-top", scr_height * 0.5 * 0.8)
-  // $(".heart_beat").css("margin-top", scr_height * 0.5 * 0.8)
-  // $(".heart_usr_2").css("margin-top", "25px")
 
   //receive the first data from the server
 
@@ -120,41 +108,41 @@ $(document).ready(function(){
   //   });
   // });
   //
-  $(".btn-checkmark").click(function(){
-    if (readyToMatch){
-      // SeeMyMatch();
-
-      // var xhr = new XMLHttpRequest();
-      // xhr.onreadystatechange = function() {
-      //   if(xhr.readyState ==  XMLHttpRequest.DONE && xhr.status == 200) {
-      //       alert(xhr.responseText);
-      //   }else{
-      //     alert('something bad happened');
-      //     alert('xhr.status: '+xhr.status);
-      //   }
-      // }
-      // xhr.open('GET', 'http://localhost:3000/match/hi', true);
-      // xhr.send(null);
-      // $.post( "http://localhost:3000/api/hi", function( data ) {
-      //   $( ".div-hidden" ).html('random shit');
-      //   alert( "Load was performed." );
-      // });
-
-
-      // switch readyToMatch to false so that user cannot double click the same button
-      readyToMatch=false;
-      // change the html to show the name of the two matches. Change it to first name later
-      $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
-      //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
-      $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
-      $(".div-hidden").show();
-      animateHeart(0);
-    }
-  });
-
-  // $(".view-result").click(function(){
-  //   SeeMyMatch();
+  // $(".btn-checkmark").click(function(){
+  //   if (readyToMatch){
+  //     SeeMyMatch();
+  //
+  //     // var xhr = new XMLHttpRequest();
+  //     // xhr.onreadystatechange = function() {
+  //     //   if(xhr.readyState ==  XMLHttpRequest.DONE && xhr.status == 200) {
+  //     //       alert(xhr.responseText);
+  //     //   }else{
+  //     //     alert('something bad happened');
+  //     //     alert('xhr.status: '+xhr.status);
+  //     //   }
+  //     // }
+  //     // xhr.open('GET', 'http://localhost:3000/match/hi', true);
+  //     // xhr.send(null);
+  //     // $.post( "http://localhost:3000/api/hi", function( data ) {
+  //     //   $( ".div-hidden" ).html('random shit');
+  //     //   alert( "Load was performed." );
+  //     // });
+  //
+  //
+  //     // switch readyToMatch to false so that user cannot double click the same button
+  //     // readyToMatch=false;
+  //     // // change the html to show the name of the two matches. Change it to first name later
+  //     // $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
+  //     // //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
+  //     // $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
+  //     // $(".div-hidden").show();
+  //     // animateHeart(0);
+  //   }
   // });
+
+  $(".view-result").click(function(){
+    SeeMyMatch();
+  });
 
   function SendVote() {
 
@@ -212,16 +200,16 @@ $(document).ready(function(){
     $(".cur_usr_name").html(cur_usr_name);
   }
 
-  // function doanimation (data) {
-  //   readyToMatch=false;
-  //   // change the html to show the name of the two matches. Change it to first name later
-  //   $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
-  //   //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
-  //   $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
-  //   $(".div-hidden").show();
-  //   // alert(data);
-  //   animateHeart(0, data);
-  // }
+  function doanimation (data) {
+    readyToMatch=false;
+    // change the html to show the name of the two matches. Change it to first name later
+    $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
+    //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
+    $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
+    $(".div-hidden").show();
+    // alert(data);
+    animateHeart(0, data);
+  }
   // function SeeMyMatch() {
   //   usr_data = {'usr_id': cur_usr_id, 'usr_name': cur_usr_name};
   //   $.ajax({
