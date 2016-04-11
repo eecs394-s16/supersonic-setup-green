@@ -24,10 +24,10 @@ $(document).ready(function(){
   // $(".div-overlap").css("height", "100%");
   // $(".div-overlap").css("width", scr_width);
   // $(".match_space").css("margin-top", scr_height * 0.05);
-  $(".person_frame").css("height", scr_width * 0.6);
-  $(".person_frame").css("width", scr_width * 0.5);
-  $(".user_pic").css("height", scr_width * 0.5 * 0.70);
-  $(".user_pic").css("width", scr_width * 0.5 * 0.70);
+  // $(".person_frame").css("height", scr_width * 0.6);
+  // $(".person_frame").css("width", scr_width * 0.5);
+  $(".user_pic").css("height", scr_width * 0.5 * 0.85);
+  $(".user_pic").css("width", scr_width * 0.5 * 0.85);
   $(".user_name").css("height", scr_width * 0.5 * 0.25);
   $(".user_name").css("width", scr_width * 0.5 * 0.25);
   $(".btn-select").css("height", scr_width * 0.5 * 0.75 * 0.5);
@@ -43,6 +43,9 @@ $(document).ready(function(){
   // $(".div-hidden").css("bottom", scr_height);
   // $(".div-hidden").css("margin-top", scr_height);
   $(".heart").css("margin-top", scr_height * 0.5 * 0.8);
+  // $(".heart_usr_1").css("margin-top", scr_height * 0.5 * 0.8)
+  // $(".heart_beat").css("margin-top", scr_height * 0.5 * 0.8)
+  // $(".heart_usr_2").css("margin-top", "25px")
 
   //receive the first data from the server
 
@@ -66,48 +69,51 @@ $(document).ready(function(){
 
   });
 
-  $(".btn-close").click(function(){
-    usr_data = {'usr_id': 1, 'match_id': false, 'yes': true};
-    usr_data = JSON.stringify(usr_data);
-    // alert("h");
-    $.ajax({
-      type: "POST",
-      contentType: "application/json",
-      dataType: "json",
-      url: "http://loveisintheair.herokuapp.com/api/match",
-      data: usr_data,
-      error: function(er) {
-        var keys = Object.keys(er);
-        alert(keys);
-        // console.log(er);
-        alert(er['error']);
-        alert(er['getAllResponseHeaders']);
-        alert(er['status']);
-      },
-      success: function(data) {
-        // alert("yes");
-        var keys = Object.keys(data);
-        // alert(keys);
-        // var receivedData = JSON.parse(data);
-        // alert(receivedData);
-        cur_usr_id=data['user_id'];
-        match_id=data['match_id'];
-        user_name_1=data['users'][0]['name'];//full name string
-        user_img_1=data['users'][0]['profile_picture'];// profile picture url
-        user_name_2=data['users'][1]['name'];
-        user_img_2=data['users'][1]['profile_picture'];
-		  //  // Do something with the user_id and Match ID. Wait for the next user input.
-      // //  alert(user_name_1);
-      // //  alert("yes");
-			  refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2);
-        // alert(data['sup']);
-      }
-    });
-  });
-
+  // $(".btn-close").click(function(){
+  //   usr_data = {'usr_id': 1, 'match_id': false, 'yes': true};
+  //   usr_data = JSON.stringify(usr_data);
+  //   // alert("h");
+  //   $.ajax({
+  //     type: "POST",
+  //     contentType: "application/json",
+  //     dataType: "json",
+  //     url: "http://loveisintheair.herokuapp.com/api/match",
+  //     data: usr_data,
+  //     xhrFields: {
+  //       withCredentials: true
+  //     },
+  //     error: function(er) {
+  //       var keys = Object.keys(er);
+  //       alert(keys);
+  //       // console.log(er);
+  //       alert(er['error']);
+  //       alert(er['getAllResponseHeaders']);
+  //       alert(er['status']);
+  //     },
+  //     success: function(data) {
+  //       // alert("yes");
+  //       var keys = Object.keys(data);
+  //       // alert(keys);
+  //       // var receivedData = JSON.parse(data);
+  //       // alert(receivedData);
+  //       cur_usr_id=data['user_id'];
+  //       match_id=data['match_id'];
+  //       user_name_1=data['users'][0]['name'];//full name string
+  //       user_img_1=data['users'][0]['profile_picture'];// profile picture url
+  //       user_name_2=data['users'][1]['name'];
+  //       user_img_2=data['users'][1]['profile_picture'];
+	// 	  //  // Do something with the user_id and Match ID. Wait for the next user input.
+  //     // //  alert(user_name_1);
+  //     // //  alert("yes");
+	// 		  refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2);
+  //       // alert(data['sup']);
+  //     }
+  //   });
+  // });
+  //
   $(".btn-checkmark").click(function(){
     if (readyToMatch){
-      SeeMyMatch();
+      // SeeMyMatch();
 
       // var xhr = new XMLHttpRequest();
       // xhr.onreadystatechange = function() {
@@ -127,19 +133,19 @@ $(document).ready(function(){
 
 
       // switch readyToMatch to false so that user cannot double click the same button
-      // readyToMatch=false;
-      // // change the html to show the name of the two matches. Change it to first name later
-      // $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
-      // //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
-      // $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
-      // $(".div-hidden").show();
-      // animateHeart(0);
+      readyToMatch=false;
+      // change the html to show the name of the two matches. Change it to first name later
+      $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
+      //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
+      $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
+      $(".div-hidden").show();
+      animateHeart(0);
     }
   });
 
-  $(".view-result").click(function(){
-    SeeMyMatch();
-  });
+  // $(".view-result").click(function(){
+  //   SeeMyMatch();
+  // });
 
   function SendVote() {
 
@@ -197,16 +203,16 @@ $(document).ready(function(){
     $(".cur_usr_name").html(cur_usr_name);
   }
 
-  function doanimation (data) {
-    readyToMatch=false;
-    // change the html to show the name of the two matches. Change it to first name later
-    $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
-    //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
-    $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
-    $(".div-hidden").show();
-    // alert(data);
-    animateHeart(0, data);
-  }
+  // function doanimation (data) {
+  //   readyToMatch=false;
+  //   // change the html to show the name of the two matches. Change it to first name later
+  //   $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
+  //   //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
+  //   $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
+  //   $(".div-hidden").show();
+  //   // alert(data);
+  //   animateHeart(0, data);
+  // }
   // function SeeMyMatch() {
   //   usr_data = {'usr_id': cur_usr_id, 'usr_name': cur_usr_name};
   //   $.ajax({
