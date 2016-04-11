@@ -23,12 +23,12 @@ function sendFBlogin() {
       data: login_credential,
       error: function(er) {
         var keys = Object.keys(er);
-        alert(keys);
-        // console.log(er);
-        alert(er['error']);
-        // alert(er['getAllResponseHeaders']);
-        // alert(er['status']);
-        alert('just dismissing the window and pretend it succeeded for now');
+        // alert(keys);
+        // // console.log(er);
+        // alert(er['error']);
+        // // alert(er['getAllResponseHeaders']);
+        // // alert(er['status']);
+        // alert('just dismissing the window and pretend it succeeded for now');
       	supersonic.ui.initialView.dismiss();
       },
       success: function(data) {

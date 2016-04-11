@@ -45,6 +45,22 @@ $(document).ready(function(){
   $(".user_name_2").html(user_name_2);
   $(".cur_usr_name").html(cur_usr_name);
 
+  // $(".user_img_1").swipe(function(){
+  //   alert("works");
+  // });
+
+  $(".user_img_1").swipe( {
+    //Generic swipe handler for all directions
+    swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+      // $(this).text("You swiped " + direction );
+      if (direction === "left") {
+        SeeMyMatch()
+        // alert("no");
+      }
+    }
+  });
+
+
   //event triger
   $(".user_1").click(function(){
 
@@ -57,7 +73,6 @@ $(document).ready(function(){
   $(".btn-close").click(function(){
     usr_data = {'user_id': 1, 'match_id': false, 'yes': true};
     usr_data = JSON.stringify(usr_data);
-    // alert("h");
     $.ajax({
       type: "POST",
       contentType: "application/json",
@@ -91,14 +106,6 @@ $(document).ready(function(){
   $(".btn-checkmark").click(function(){
     if (readyToMatch){
       SeeMyMatch();
-
-      // switch readyToMatch to false so that user cannot double click the same button
-      // readyToMatch=false;
-      // change the html to show the name of the two matches. Change it to first name later
-      // $(".heart").html('<p style="color:#FFFFFF;">'+user_name_1+'<span style="font-size: 75px; color: #990033;">&hearts;</span>'+user_name_2+'</p>');
-      // //$("#match_screen").css("filter","blur(5px)"); blur doesnt work
-      // $(".div-hidden").css("background-color", "rgba(0,0,0,0.7)");
-      // $(".div-hidden").show();
     }
   });
 
@@ -117,7 +124,6 @@ $(document).ready(function(){
   function SeeMyMatch() {
     usr_data = {'user_id': 1, 'match_id': false, 'yes': true};
     usr_data = JSON.stringify(usr_data);
-    // alert("h");
     $.ajax({
       type: "POST",
       contentType: "application/json",
@@ -140,7 +146,6 @@ $(document).ready(function(){
   }
 
   function refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2){
-    alert("yre")
     $(".user_img_1").attr("src", user_img_1);
     $(".user_img_2").attr("src", user_img_2);
     $(".user_name_1").html(user_name_1);
@@ -158,7 +163,6 @@ $(document).ready(function(){
   }
 
   function animateHeart(times_run, data) {
-    // alert(data);
     $('.heart span').animate({
         fontSize: $('.heart span').css('font-size') == '75px' ? '50px' : '75px'
     }, 500, function(){
@@ -169,7 +173,7 @@ $(document).ready(function(){
         $('.div-hidden').css("display", "none");
         readyToMatch=true;
         var keys = Object.keys(data);
-        alert(keys)
+        // alert(keys)
         cur_usr_id=data['user_id'];
         match_id=data['match_id'];
         user_name_1=data['users'][0]['name'];//full name string
