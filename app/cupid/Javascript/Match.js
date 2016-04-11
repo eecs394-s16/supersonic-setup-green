@@ -55,6 +55,7 @@ $(document).ready(function(){
       // $(this).text("You swiped " + direction );
       if (direction === "left") {
         SeeMyMatch()
+
         // alert("no");
       }
     }
@@ -79,9 +80,6 @@ $(document).ready(function(){
       dataType: "json",
       url: "http://loveisintheair.herokuapp.com/api/votes",
       data: usr_data,
-      xhrFields: {
-        withCredentials: true
-      },
       error: function(er) {
         var keys = Object.keys(er);
         alert(keys);
@@ -98,7 +96,7 @@ $(document).ready(function(){
         user_img_1=data['users'][0]['profile_picture'];// profile picture url
         user_name_2=data['users'][1]['name'];
         user_img_2=data['users'][1]['profile_picture'];
-			  refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2);
+  		  refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2);
       }
     });
   });
