@@ -121,6 +121,13 @@ html {
   text-align: center;
 }
 
+#swipe-directions {
+  position: relative;
+  top: 25px;
+  font-style: italic;
+}
+
+
 .div-col-heart {
   text-align: center;
 }
@@ -144,7 +151,7 @@ button.btn-select {
   background-size: 100% 100%
   background-color: #42a4e0;
   color: #fff;
-  border: 1px solid red;
+  border: 1px solid #E84C59;
   border-radius: 40px;
   /*border-color: red;*/
   /*box-shadow:  0 1px 1px black inset,0 1px 1px black inset,0 1px 1px black inset;*/
@@ -167,11 +174,11 @@ button.btn-select {
   height: 80px;
   width: 100px;
   border-width: 1px;
-  border-color: red;
+  border-color: #E84C59;
 }
 
 .btn-checkmark {
-  background-color: red;
+  background-color: #E84C59;
 }
 
 .choice-close {
@@ -179,5 +186,9 @@ button.btn-select {
 }
 
 .choice-checkmark {
-  text-align: left;
+  text-align: center;
+}
+
+.heart_part {
+  height: 100px;
 }

@@ -14,24 +14,30 @@
     </div>
     <div class="row match_space">
       <div class="col user_1 person_frame">
-        <div class="row">
-          <div class="col" style="text-align: center">
+        <div class="row img_flip">
+          <div class="col front" style="text-align: center;">
             <img class="user_pic user_img_1" src=""/>
           </div>
+          <div class="col back" style="text-align: center;">
+            <img class="user_pic user_img_3" src=""/>
+          </div>
         </div>
-        <div class="row">
+        <div class="row name" style="margin-top: 10px">
           <div class="col" style="text-align: center">
             <h4 class="user_name_1"></h4>
           </div>
         </div>
       </div>
       <div class="col user_2 person_frame" style="margin-left: 10px">
-        <div class="row">
-          <div class="col" style="text-align: center">
+        <div class="row img_flip">
+          <div class="col front" style="text-align: center;">
             <img class="user_pic user_img_2" src=""/>
           </div>
+          <div class="col back" style="text-align: center;">
+            <img class="user_pic user_img_4" src=""/>
+          </div>
         </div>
-        <div class="row">
+        <div class="row name" style="margin-top: 10px">
           <div class="col" style="text-align: center">
             <h4 class="user_name_2"></h4>
           </div>
@@ -39,27 +45,40 @@
       </div>
     </div>
     <div id="selection_part" class="row">
-      <div class="col choice-close choice">
+      <!-- <div class="col choice-close choice">
         <button class="btn-select btn-close">
           <img src="/icons/refresh.png" style="width: 100%;">
         </button>
-      </div>
+      </div> -->
       <div class="col choice-checkmark choice">
         <button class="btn-select btn-checkmark">
           <img src="/icons/white-heart-md.png" style="width: 100%">
         </button>
+        <p id="swipe-directions"><i>Swipe for a new match</i></p>
       </div>
     </div>
   </div>
   <div class="div-overlap div-hidden">
+    <div class="row first_user">
+      <div class="col"  style="text-align: center;">
+        <h2 class="user_name_heart_1" style="color:#FFFFFF;">
+        </h2>
+      </div>
+    </div>
+    <div class="row heart_part">
       <div class="col div-col-heart">
         <p class="heart">
-          Hello
           <span style="font-size: 75px; color: #990033;">&hearts;</span>
-          World
         </p>
       </div>
+    </div>
+    <div class="row second_user">
+      <div class="col"  style="text-align: center; ">
+        <h2 class="user_name_heart_2" style="color:#FFFFFF;">
+        </h2>
+      </div>
+    </div>
   </div>
 </div>
+
 <script src="./Javascript/Match.js"></script>
-<script src="./Javascript/jquery.touchSwipe.min.js"></script>
