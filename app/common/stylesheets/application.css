@@ -191,3 +191,15 @@ button.btn-select {
 .heart_part {
   height: 100px;
 }
+
+tab-bar-item#MyMatch {
+  background-image: url(icons/MyMatch.png);
+}
+
+tab-bar-item#Match {
+  background-image: url(icons/Match.png);
+}
+
+tab-bar tab-bar-item:selected {
+  color: #E84C59;
+}
