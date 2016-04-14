@@ -35,20 +35,48 @@ $(document).ready(function(){
   // $(".heart").css("margin-top", scr_height * 0.5 * 0.8);
   $(".name").css("margin-top", scr_width * 0.5);
 
-  //receive the first data from the server
-
-  user_img_1 = "/icons/pig1.jpg";
-  user_img_2 = "/icons/pig2.jpg";
-  user_name_1 = "Noura Li";
-  user_name_2 = "John Smith";
-  cur_usr_name = "Collin";
-  $(".user_img_1").attr("src", user_img_1);
-  $(".user_img_2").attr("src", user_img_2);
-  $(".user_name_1").html(user_name_1);
-  $(".user_name_2").html(user_name_2);
-  $(".cur_usr_name").html(cur_usr_name);
-
   var img_dire = true;
+
+  usr_data = {'user_id': 1, 'match_id': false, 'yes': true};
+  usr_data = JSON.stringify(usr_data);
+  $.ajax({
+    type: "POST",
+    contentType: "application/json",
+    dataType: "json",
+    url: "http://loveisintheair.herokuapp.com/api/votes",
+    data: usr_data,
+    error: function(er) {
+      var keys = Object.keys(er);
+      alert(er['status']);
+    },
+    success: function(data) {
+      var keys = Object.keys(data);
+      cur_usr_id=data['user_id'];
+      match_id=data['match_id'];
+      user_name_1=data['users'][0]['name'];//full name string
+      user_img_1=data['users'][0]['profile_picture'];// profile picture url
+      user_name_2=data['users'][1]['name'];
+      user_img_2=data['users'][1]['profile_picture'];
+      $(".user_img_1").attr("src", user_img_1);
+      $(".user_img_2").attr("src", user_img_2);
+      $(".user_name_1").html(user_name_1);
+      $(".user_name_2").html(user_name_2);
+      $(".cur_usr_name").html(cur_usr_name);
+    }
+  });
+  //receive the first data from the server
+  //
+  // user_img_1 = "/icons/pig1.jpg";
+  // user_img_2 = "/icons/pig2.jpg";
+  // user_name_1 = "Noura Li";
+  // user_name_2 = "John Smith";
+  cur_usr_name = "Collin";
+  // $(".user_img_1").attr("src", user_img_1);
+  // $(".user_img_2").attr("src", user_img_2);
+  // $(".user_name_1").html(user_name_1);
+  // $(".user_name_2").html(user_name_2);
+  // $(".cur_usr_name").html(cur_usr_name);
+
   $(".img_flip").flip({});
 
   $(".match-page").swipe( {
@@ -58,50 +86,47 @@ $(document).ready(function(){
 
       if (direction === "left" || direction === "right") {
         $('#swipe-directions').hide();
-        // alert("yes");
-        // alert(img_dire);
-        $(".img_flip").flip(img_dire);
-        img_dire = !img_dire;
+        usr_data = {'user_id': 1, 'match_id': false, 'yes': true};
+        usr_data = JSON.stringify(usr_data);
+        $.ajax({
+          type: "POST",
+          contentType: "application/json",
+          dataType: "json",
+          url: "http://loveisintheair.herokuapp.com/api/votes",
+          data: usr_data,
+          error: function(er) {
+            var keys = Object.keys(er);
+            alert(er['status']);
+          },
+          success: function(data) {
+            var keys = Object.keys(data);
+            cur_usr_id=data['user_id'];
+            match_id=data['match_id'];
+            user_name_1=data['users'][0]['name'];//full name string
+            user_img_1=data['users'][0]['profile_picture'];// profile picture url
+            user_name_2=data['users'][1]['name'];
+            user_img_2=data['users'][1]['profile_picture'];
+            if (img_dire === true) {
+              $(".user_img_3").attr("src", user_img_1);
+            } else {
+              $(".user_img_1").attr("src", user_img_1);
+            }
+            if (img_dire === true) {
+              $(".user_img_4").attr("src", user_img_2);
+            } else {
+              $(".user_img_2").attr("src", user_img_2);
+            }
+            $(".img_flip").flip(img_dire);
+            img_dire = !img_dire;
+            $(".user_name_1").html(user_name_1);
+            $(".user_name_2").html(user_name_2);
+            $(".cur_usr_name").html(cur_usr_name);
+          }
+        });
+        // $(".img_flip").flip(img_dire);
+        // img_dire = !img_dire;
         // alert(img_dire);
       }
-      // if (direction === "left") {
-      //   // SeeMyMatch()
-      //   usr_data = {'user_id': 1, 'match_id': false, 'yes': true};
-      //   usr_data = JSON.stringify(usr_data);
-      //   $.ajax({
-      //     type: "POST",
-      //     contentType: "application/json",
-      //     dataType: "json",
-      //     url: "http://loveisintheair.herokuapp.com/api/votes",
-      //     data: usr_data,
-      //     error: function(er) {
-      //       var keys = Object.keys(er);
-      //       alert(keys);
-      //       // console.log(er);
-      //       alert(er['error']);
-      //       alert(er['getAllResponseHeaders']);
-      //       alert(er['status']);
-      //     },
-      //     success: function(data) {
-      //       var keys = Object.keys(data);
-      //       cur_usr_id=data['user_id'];
-      //       match_id=data['match_id'];
-      //       user_name_1=data['users'][0]['name'];//full name string
-      //       user_img_1=data['users'][0]['profile_picture'];// profile picture url
-      //       user_name_2=data['users'][1]['name'];
-      //       user_img_2=data['users'][1]['profile_picture'];
-      //       // if (img_dire === true) {
-      //       //   $(".user_img_3").attr("src", user_img_1);
-      //       // } else {
-      //       //   $(".user_img_1").attr("src", user_img_1);
-      //       // }
-      //       // $(".test").flip(img_dire);
-      //       // img_dire = ~img_dire;
-      //       refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2);
-      //     }
-      //   });
-      //   // alert("no");
-      // }
     }
   });
 
@@ -113,40 +138,6 @@ $(document).ready(function(){
 
   $(".user_2").click(function(){
 
-  });
-
-  $(".btn-close").click(function(){
-    usr_data = {'user_id': 1, 'match_id': false, 'yes': true};
-    usr_data = JSON.stringify(usr_data);
-    $.ajax({
-      type: "POST",
-      contentType: "application/json",
-      dataType: "json",
-      url: "http://loveisintheair.herokuapp.com/api/votes",
-      data: usr_data,
-      error: function(er) {
-        var keys = Object.keys(er);
-        alert(keys);
-        // console.log(er);
-        alert(er['error']);
-        alert(er['getAllResponseHeaders']);
-        alert(er['status']);
-      },
-      success: function(data) {
-        var keys = Object.keys(data);
-        cur_usr_id=data['user_id'];
-        match_id=data['match_id'];
-        user_name_1=data['users'][0]['name'];//full name string
-        user_img_1=data['users'][0]['profile_picture'];// profile picture url
-        user_name_2=data['users'][1]['name'];
-        user_img_2=data['users'][1]['profile_picture'];
-        $(".user_img_1").attr("src", user_img_1);
-        $(".user_img_2").attr("src", user_img_2);
-        $(".user_name_1").html(user_name_1);
-        $(".user_name_2").html(user_name_2);
-        $(".cur_usr_name").html(cur_usr_name);
-      }
-    });
   });
 
   $(".btn-checkmark").click(function(){
@@ -178,10 +169,6 @@ $(document).ready(function(){
       data: usr_data,
       error: function(er) {
         var keys = Object.keys(er);
-        alert(keys);
-        // console.log(er);
-        alert(er['error']);
-        alert(er['getAllResponseHeaders']);
         alert(er['status']);
       },
       success: function(data) {
@@ -192,8 +179,18 @@ $(document).ready(function(){
   }
 
   function refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2){
-    $(".user_img_1").attr("src", user_img_1);
-    $(".user_img_2").attr("src", user_img_2);
+    if(img_dire === true) {
+      $(".user_img_1").attr("src", user_img_1);
+    } else {
+      $(".user_img_3").attr("src", user_img_1);
+    }
+    if(img_dire === true) {
+      $(".user_img_2").attr("src", user_img_2);
+    } else {
+      $(".user_img_4").attr("src", user_img_2);
+    }
+    $(".img_flip").flip(img_dire);
+    img_dire = !img_dire;
     $(".user_name_1").html(user_name_1);
     $(".user_name_2").html(user_name_2);
     $(".cur_usr_name").html(cur_usr_name);
