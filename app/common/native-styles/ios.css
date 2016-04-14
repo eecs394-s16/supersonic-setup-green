@@ -34,3 +34,10 @@ tab-bar tab-bar-item:selected {
   color: #1596f7;
 }
 
+tab-bar-item#MyMatch {
+  background-image: url(icons/MyMatch.png);
+}
+
+tab-bar-item#Match {
+  background-image: url(icons/Match.png);
+}

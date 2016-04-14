@@ -51,7 +51,7 @@ $(document).ready(function(){
     },
     success: function(data) {
       var keys = Object.keys(data);
-      cur_usr_id=data['user_id'];
+      cur_usr_name=data['user_name'];
       match_id=data['match_id'];
       user_name_1=data['users'][0]['name'];//full name string
       user_img_1=data['users'][0]['profile_picture'];// profile picture url
@@ -70,7 +70,7 @@ $(document).ready(function(){
   // user_img_2 = "/icons/pig2.jpg";
   // user_name_1 = "Noura Li";
   // user_name_2 = "John Smith";
-  cur_usr_name = "Collin";
+  // cur_usr_name = "Collin";
   // $(".user_img_1").attr("src", user_img_1);
   // $(".user_img_2").attr("src", user_img_2);
   // $(".user_name_1").html(user_name_1);
@@ -100,7 +100,7 @@ $(document).ready(function(){
           },
           success: function(data) {
             var keys = Object.keys(data);
-            cur_usr_id=data['user_id'];
+            cur_usr_name=data['user_name'];
             match_id=data['match_id'];
             user_name_1=data['users'][0]['name'];//full name string
             user_img_1=data['users'][0]['profile_picture'];// profile picture url
@@ -178,16 +178,17 @@ $(document).ready(function(){
     });
   }
 
-  function refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2){
+  function refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2,cur_usr_name){
+
     if(img_dire === true) {
-      $(".user_img_1").attr("src", user_img_1);
-    } else {
       $(".user_img_3").attr("src", user_img_1);
+    } else {
+      $(".user_img_1").attr("src", user_img_1);
     }
     if(img_dire === true) {
-      $(".user_img_2").attr("src", user_img_2);
-    } else {
       $(".user_img_4").attr("src", user_img_2);
+    } else {
+      $(".user_img_2").attr("src", user_img_2);
     }
     $(".img_flip").flip(img_dire);
     img_dire = !img_dire;
@@ -219,13 +220,13 @@ $(document).ready(function(){
         readyToMatch=true;
         var keys = Object.keys(data);
         // alert(keys)
-        cur_usr_id=data['user_id'];
+        cur_usr_name=data['user_name'];
         match_id=data['match_id'];
         user_name_1=data['users'][0]['name'];//full name string
         user_img_1=data['users'][0]['profile_picture'];// profile picture url
         user_name_2=data['users'][1]['name'];
         user_img_2=data['users'][1]['profile_picture'];
-			  refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2);
+			  refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2,cur_usr_name);
       }else{
         if (times_run==0){
           // $('.heart').fadeTo( "fast", 1.00 ); //.fadeTo( duration, opacity [, complete ] )

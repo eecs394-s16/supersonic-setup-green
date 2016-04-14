@@ -60,14 +60,10 @@ tab-bar tab-bar-item marker-top:selected {
   background-color: #1596f7;
 }
 
-tab-bar-item#settings {
-  background-image: url(icons/cog.svg);
-}
-
-tab-bar-item#index {
+tab-bar-item#MyMatch {
   background-image: url(icons/home.svg);
 }
 
-tab-bar-item#internet {
-  background-image: url(icons/search.svg);
+tab-bar-item#Match {
+  background-image: url(icons/Match.png);
 }
