@@ -1,18 +1,19 @@
-$(document).ready(function(){
+//user data
+cur_usr_name = "";
+cur_usr_id = "";
+user_img_1 = "";
+user_img_2 = "";
+user_name_1 = "";
+user_name_2 = "";
+user_id_1 = "";
+user_id_2 = "";
+match_id = false;
+vote = false;
+MyMatchPage = "";
+readyToMatch=true;//Set to true for now. If false, we cannot click the match button. That means either we have not received a new match yet or we're in animation stage.
+ranOutOfMatches=false;
 
-  //user data
-  cur_usr_name = "";
-  cur_usr_id = "";
-  user_img_1 = "";
-  user_img_2 = "";
-  user_name_1 = "";
-  user_name_2 = "";
-  user_id_1 = "";
-  user_id_2 = "";
-  match_id = "";
-  vote = false;
-  MyMatchPage = "";
-  readyToMatch=true;//Set to true for now. If false, we cannot click the match button. That means either we have not received a new match yet or we're in animation stage.
+$(document).ready(function(){
 
   //css auto-adjust according to the screen size
   scr_height = $(window).height() - 44;
@@ -37,7 +38,10 @@ $(document).ready(function(){
 
   var img_dire = true;
 
-  usr_data = {'user_id': 1, 'match_id': false, 'yes': true};
+  // Get the first pair
+  // Specify match_id=false and yes=false to not be recorded by the votes 
+  // and just get a new pair
+  usr_data = {'user_id': 1, 'match_id': false, 'yes': false};
   usr_data = JSON.stringify(usr_data);
   $.ajax({
     type: "POST",
@@ -53,29 +57,9 @@ $(document).ready(function(){
       var keys = Object.keys(data);
       cur_usr_name=data['user_name'];
       match_id=data['match_id'];
-      user_name_1=data['users'][0]['name'];//full name string
-      user_img_1=data['users'][0]['profile_picture'];// profile picture url
-      user_name_2=data['users'][1]['name'];
-      user_img_2=data['users'][1]['profile_picture'];
-      $(".user_img_1").attr("src", user_img_1);
-      $(".user_img_2").attr("src", user_img_2);
-      $(".user_name_1").html(user_name_1);
-      $(".user_name_2").html(user_name_2);
-      $(".cur_usr_name").html(cur_usr_name);
+      refreshMatchInfo(data);
     }
   });
-  //receive the first data from the server
-  //
-  // user_img_1 = "/icons/pig1.jpg";
-  // user_img_2 = "/icons/pig2.jpg";
-  // user_name_1 = "Noura Li";
-  // user_name_2 = "John Smith";
-  // cur_usr_name = "Collin";
-  // $(".user_img_1").attr("src", user_img_1);
-  // $(".user_img_2").attr("src", user_img_2);
-  // $(".user_name_1").html(user_name_1);
-  // $(".user_name_2").html(user_name_2);
-  // $(".cur_usr_name").html(cur_usr_name);
 
   $(".img_flip").flip({});
 
@@ -86,46 +70,7 @@ $(document).ready(function(){
 
       if (direction === "left" || direction === "right") {
         $('#swipe-directions').hide();
-        usr_data = {'user_id': 1, 'match_id': false, 'yes': true};
-        usr_data = JSON.stringify(usr_data);
-        $.ajax({
-          type: "POST",
-          contentType: "application/json",
-          dataType: "json",
-          url: "http://loveisintheair.herokuapp.com/api/votes",
-          data: usr_data,
-          error: function(er) {
-            var keys = Object.keys(er);
-            alert(er['status']);
-          },
-          success: function(data) {
-            var keys = Object.keys(data);
-            cur_usr_name=data['user_name'];
-            match_id=data['match_id'];
-            user_name_1=data['users'][0]['name'];//full name string
-            user_img_1=data['users'][0]['profile_picture'];// profile picture url
-            user_name_2=data['users'][1]['name'];
-            user_img_2=data['users'][1]['profile_picture'];
-            if (img_dire === true) {
-              $(".user_img_3").attr("src", user_img_1);
-            } else {
-              $(".user_img_1").attr("src", user_img_1);
-            }
-            if (img_dire === true) {
-              $(".user_img_4").attr("src", user_img_2);
-            } else {
-              $(".user_img_2").attr("src", user_img_2);
-            }
-            $(".img_flip").flip(img_dire);
-            img_dire = !img_dire;
-            $(".user_name_1").html(user_name_1);
-            $(".user_name_2").html(user_name_2);
-            $(".cur_usr_name").html(cur_usr_name);
-          }
-        });
-        // $(".img_flip").flip(img_dire);
-        // img_dire = !img_dire;
-        // alert(img_dire);
+        SubmitMatchVote(false);
       }
     }
   });
@@ -142,12 +87,12 @@ $(document).ready(function(){
 
   $(".btn-checkmark").click(function(){
     if (readyToMatch){
-      SeeMyMatch();
+      SubmitMatchVote(true);
     }
   });
 
   $(".view-result").click(function(){
-    SeeMyMatch();
+    SubmitMatchVote(true);
   });
 
   function SendVote() {
@@ -158,8 +103,12 @@ $(document).ready(function(){
     $('.heart span').stop();
   }
 
-  function SeeMyMatch() {
-    usr_data = {'user_id': 1, 'match_id': false, 'yes': true};
+  function SubmitMatchVote(yes) {
+    if (ranOutOfMatches){
+      alert("You've ran out of matches! Ask your friend to download Cupid to have more potential matches");
+      return;
+    }
+    usr_data = {'user_id': 1, 'match_id': match_id, 'yes': yes};
     usr_data = JSON.stringify(usr_data);
     $.ajax({
       type: "POST",
@@ -173,28 +122,47 @@ $(document).ready(function(){
       },
       success: function(data) {
         var keys = Object.keys(data);
-        doanimation(data);
+        if (yes==true){
+          doanimation(data);
+        }else{
+          refreshMatchInfo(data);
+        }
       }
     });
   }
 
-  function refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2,cur_usr_name){
+  function refreshMatchInfo(data){
+    cur_usr_name=data['user_name'];
+    match_id=data['match_id'];
+    if (match_id!=false){
+      // IF there is a next match
+      user_name_1=data['users'][0]['name'];//full name string
+      user_img_1=data['users'][0]['profile_picture'];// profile picture url
+      user_name_2=data['users'][1]['name'];
+      user_img_2=data['users'][1]['profile_picture'];
 
-    if(img_dire === true) {
-      $(".user_img_3").attr("src", user_img_1);
-    } else {
-      $(".user_img_1").attr("src", user_img_1);
+      if(img_dire === true) {
+        $(".user_img_3").attr("src", user_img_1);
+      } else {
+        $(".user_img_1").attr("src", user_img_1);
+      }
+      if(img_dire === true) {
+        $(".user_img_4").attr("src", user_img_2);
+      } else {
+        $(".user_img_2").attr("src", user_img_2);
+      }
+      $(".img_flip").flip(img_dire);
+      img_dire = !img_dire;
+      $(".user_name_1").html(user_name_1);
+      $(".user_name_2").html(user_name_2);
+      $(".cur_usr_name").html(cur_usr_name);
+    }else{
+      // if we ran out of matches
+      ranOutOfMatches=true;
+      alert("You've ran out of matches! Ask your friend to download Cupid to have more potential matches");
     }
-    if(img_dire === true) {
-      $(".user_img_4").attr("src", user_img_2);
-    } else {
-      $(".user_img_2").attr("src", user_img_2);
-    }
-    $(".img_flip").flip(img_dire);
-    img_dire = !img_dire;
-    $(".user_name_1").html(user_name_1);
-    $(".user_name_2").html(user_name_2);
-    $(".cur_usr_name").html(cur_usr_name);
+
+    
   }
 
   function doanimation (data) {
@@ -220,13 +188,7 @@ $(document).ready(function(){
         readyToMatch=true;
         var keys = Object.keys(data);
         // alert(keys)
-        cur_usr_name=data['user_name'];
-        match_id=data['match_id'];
-        user_name_1=data['users'][0]['name'];//full name string
-        user_img_1=data['users'][0]['profile_picture'];// profile picture url
-        user_name_2=data['users'][1]['name'];
-        user_img_2=data['users'][1]['profile_picture'];
-			  refreshMatchInfo(user_name_1,user_img_1,user_name_2,user_img_2,cur_usr_name);
+			  refreshMatchInfo(data);
       }else{
         if (times_run==0){
           // $('.heart').fadeTo( "fast", 1.00 ); //.fadeTo( duration, opacity [, complete ] )

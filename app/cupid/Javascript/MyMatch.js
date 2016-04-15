@@ -2,7 +2,7 @@
 // cannot use document.ready function because it's jquery not javascript. It behaves differently in mobile setting.
 
 $(document).ready(function(){
-  usr_data = JSON.stringify({'user_id': 1}); //Assuming user_id = 1 for now.
+  usr_data = JSON.stringify({'user_id': 2}); //Assuming user_id = 1 for now.
 
   $.ajax({
     type: "POST",
