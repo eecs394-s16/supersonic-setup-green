@@ -3,8 +3,8 @@ $(document).ready(function() {
   $(".login").css("margin-top", scr_height * 0.3);
   $(".btn-login").click(function(){
     // window.location.href = "http://loveisintheair.herokuapp.com/signin"
-    window.location.href = "http://localhost/Match"
-  	// sendFBlogin();
+    // window.location.href = "http://localhost/Match"
+  	sendFBlogin();
 
     //supersonic.ui.initialView.dismiss();
 
