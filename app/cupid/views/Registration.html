@@ -1,2 +1,29 @@
-<div ng-controller="IndexController">
+<div ng-controller="RegistrationController">
+  <super-navbar>
+    <super-navbar-title>
+      Cupid SignUp
+    </super-navbar-title>
+  </super-navbar>
+  <body>
+    <form class="login registration">
+      <h1>Cupid - some intro</h1>
+      <input type="text" name="email" class="login-input" placeholder="Email" autofocus>
+      <input type="password" name="password" class="login-input" placeholder="Password">
+      <input type="password" name="confirm-password" class="login-input" placeholder="Confirm Password">
+      <div class="row">
+        <div class="col">
+          <p><input type="radio" name="straight" value="straight" />straight</p>
+        </div>
+        <div class="col">
+          <p><input type="radio" name="bi" value="bi" />bi</p>
+        </div>
+        <div class="col">
+          <p><input type="radio" name="gay" value="gay" />gay</p>
+        </div>
+      </div>
+      <button class="button button-positive button-block btn-signup btn-re-signup">Sign Up</button>
+    </form>
+  </body>
 </div>
+
+<script src="./Javascript/Registration.js"></script>

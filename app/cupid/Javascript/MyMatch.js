@@ -12,7 +12,7 @@ $(document).ready(function(){
     data: usr_data,
     error: function(er) {
       var keys = Object.keys(er);
-      alert(er['status']);
+      // alert(er['status']);
     },
     success: function(data) {
       var mymatch=data['mymatch'];

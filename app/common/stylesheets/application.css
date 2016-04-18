@@ -15,7 +15,7 @@ html {
 .login {
   margin: 50px auto;
   padding: 18px 20px;
-  width: 200px;
+  width: 300px;
   background: #3f65b7;
   background-clip: padding-box;
   border: 1px solid #172b4e;
@@ -152,17 +152,7 @@ button.btn-select {
   color: #fff;
   border: 1px solid #E84C59;
   border-radius: 40px;
-  /*border-color: red;*/
-  /*box-shadow:  0 1px 1px black inset,0 1px 1px black inset,0 1px 1px black inset;*/
 }
-
-/*.person_frame {
-  border-style: solid;
-  border-width: 1px;
-  border-color: red;
-  border-radius: 20px;
-  box-shadow: 5px 5px 5px #888888;
-}*/
 
 .user_pic {
   text-align: center;

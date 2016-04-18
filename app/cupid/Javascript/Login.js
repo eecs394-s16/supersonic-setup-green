@@ -1,11 +1,13 @@
 $(document).ready(function() {
   scr_height = $(window).height();
   $(".login").css("margin-top", scr_height * 0.3);
-  $(".btn-signin").click(function(){
+  $(".login-signin").click(function(){
   	sendFBlogin();
-
     //supersonic.ui.initialView.dismiss();
-
+  });
+  $(".login-signup").click(function(){
+    var view = new supersonic.ui.View("cupid#Registration");
+    supersonic.ui.layers.push(view);
   });
 });
 
