@@ -39,7 +39,7 @@ $(document).ready(function(){
   var img_dire = true;
 
   // Get the first pair
-  // Specify match_id=false and yes=false to not be recorded by the votes 
+  // Specify match_id=false and yes=false to not be recorded by the votes
   // and just get a new pair
   usr_data = {'user_id': 1, 'match_id': false, 'yes': false};
   usr_data = JSON.stringify(usr_data);
@@ -162,7 +162,7 @@ $(document).ready(function(){
       alert("You've ran out of matches! Ask your friend to download Cupid to have more potential matches");
     }
 
-    
+
   }
 
   function doanimation (data) {
