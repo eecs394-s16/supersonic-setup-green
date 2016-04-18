@@ -27,6 +27,8 @@ $(document).ready(function(){
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
 
+        // alert(mymatch[i]["user_2_id"]);
+
 
         // Add some text to the new cells:
         cell1.innerHTML = "<td style=\"width:50%;border-collapse:collapse;\"><img style=\"padding-left:5%;padding-top:5%;height:50%;width:90%;\" src=\""+
