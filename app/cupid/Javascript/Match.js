@@ -104,10 +104,7 @@ $(document).ready(function(){
   }
 
   function SubmitMatchVote(yes) {
-    // if (ranOutOfMatches){
-    //   alert("You've ran out of matches! Ask your friend to download Cupid to have more potential matches");
-    //   return;
-    // }
+
     usr_data = {'user_id': 1, 'match_id': match_id, 'yes': yes};
     usr_data = JSON.stringify(usr_data);
     $.ajax({
