@@ -103,9 +103,12 @@ $(document).ready(function(){
         // alert(error_msg);
       },
       success: function(data) {
-        alert(data["success"]);
-        alert(data["errors"]);
-        alert(data["access_token"]);
+        var message = {
+          sender: "cupid#Login",
+          contet: data["access_token"]
+        };
+        supersonic.data.channel('public_announcements').publish(message);
+
       }
     });
   });

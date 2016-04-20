@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  var access_token = "";
   scr_height = $(window).height();
   $(".login").css("margin-top", scr_height * 0.3);
   $(".login-signin").click(function(){
@@ -8,6 +9,15 @@ $(document).ready(function() {
   $(".login-signup").click(function(){
     var view = new supersonic.ui.View("cupid#Registration");
     supersonic.ui.layers.push(view);
+  });
+  supersonic.data.channel('public_announcements').subscribe( function(message) {
+    access_token = message['content'];
+    // alert(Trajectory.access_token);
+    // alert(message['content']);
+  // console.log("received a message " + message);
+  });
+  $(".yes").click(function(){
+    alert(access_token);
   });
 });
 
