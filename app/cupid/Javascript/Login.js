@@ -1,9 +1,7 @@
 $(document).ready(function() {
   scr_height = $(window).height();
   $(".login").css("margin-top", scr_height * 0.3);
-  $(".btn-login").click(function(){
-    // window.location.href = "http://loveisintheair.herokuapp.com/signin"
-    // window.location.href = "http://localhost/Match"
+  $(".btn-signin").click(function(){
   	sendFBlogin();
 
     //supersonic.ui.initialView.dismiss();
