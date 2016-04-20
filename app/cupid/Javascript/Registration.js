@@ -34,10 +34,10 @@ $(document).ready(function(){
           
         } else {
           
-          for (var e in data['errors']) {
-            alert(data[0]);
-            
-          }
+          $("h1").html(data['errors'][0]);
+          
+          
+          // $.each(data['errors'], function(key, value) {$("h1").html()}
           
           
         }
