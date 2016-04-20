@@ -27,6 +27,16 @@ $(document).ready(function(){
       },
       success: function(data) {
         alert(data["access_token"]);
+        if (data['success'] == true) {
+          //code
+        } else {
+          data['errors']
+          
+          
+          
+          
+          
+        }
       }
     });
   });
