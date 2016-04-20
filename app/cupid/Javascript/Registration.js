@@ -9,6 +9,7 @@ $(document).ready(function(){
     password_confirmation = $("input[name='confirm-password']").val();
     email = $("input[name='email']").val();
     orient = "straight";
+    alert(orient);
     account_info = {'user': {'password': password, 'password_confirmation': password_confirmation, 'email': email, 'orientation': orient}};
     account_info = JSON.stringify(account_info);
     $.ajax({
