@@ -20,6 +20,7 @@ $(document).ready(function(){
       data: account_info,
       error: function(err) {
         var keys = Object.keys(err);
+        alert('Is here');
         alert(keys);
         alert(err['status']);
         // error_msg = err['errors'][0];
@@ -28,12 +29,15 @@ $(document).ready(function(){
       success: function(data) {
         alert(data["access_token"]);
         if (data['success'] == true) {
-          //code
+          
+          alert('This was a success');
+          
         } else {
-          data['errors']
           
-          
-          
+          for (var e in data['errors']) {
+            alert(data[0]);
+            
+          }
           
           
         }
