@@ -20,7 +20,6 @@ $(document).ready(function(){
       data: account_info,
       error: function(err) {
         var keys = Object.keys(err);
-        alert('Is here');
         alert(keys);
         alert(err['status']);
         // error_msg = err['errors'][0];
@@ -34,8 +33,16 @@ $(document).ready(function(){
           
         } else {
           
-          $("h1").html(data['errors'][0]);
+          $("#error-handler").remove();
+          $('<div>', {id: "error-handler", style: "background-color:#E31644; opacity:0.7"}   ).insertAfter("#title");
           
+          
+          $.each(data['errors'],
+
+                 function(index, error){
+                  $("#error-handler").append( $('<p>', {text: error, style: "color:#FFFFFF"}) );
+                 });
+     
           
           // $.each(data['errors'], function(key, value) {$("h1").html()}
           
