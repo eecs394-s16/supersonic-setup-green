@@ -26,7 +26,7 @@ $(document).ready(function(){
         // alert(error_msg);
       },
       success: function(data) {
-        alert("yes");
+        alert(data["access_token"]);
       }
     });
   });
