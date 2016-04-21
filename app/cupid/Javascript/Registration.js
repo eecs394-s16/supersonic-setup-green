@@ -34,7 +34,7 @@ $(document).ready(function(){
         } else {
           
           $("#error-handler").remove();
-          $('<div>', {id: "error-handler", style: "background-color:#E31644; opacity:0.7"}   ).insertAfter("#title");
+          $('<div>', {id: "error-handler", style: "background-color:#F01644; opacity:0.7"}   ).insertAfter("#title");
           
           
           $.each(data['errors'],
