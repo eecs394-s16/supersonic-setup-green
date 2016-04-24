@@ -30,18 +30,20 @@ function sendFBlogin() {
         alert(er['status']);
       },
       success: function(data) {
-      	// The form of data passed back will be:
-        alert(data["success"]);
-        var message = {
-          user_id: data['user_id'],
-          access_token: data['access_token']
-        };
-        // alert(data['user_id']);
-        // alert(data['access_token']);
-        localStorage.setItem('test', JSON.stringify(message));
-        var msg = localStorage.getItem('test');
-        msg = jQuery.parseJSON(msg);
-        supersonic.ui.initialView.dismiss();
+        if (data["success"]==true){
+          var message = {
+            user_id: data['user_id'],
+            access_token: data['access_token']
+          };
+
+          localStorage.setItem('test', JSON.stringify(message));
+          var msg = localStorage.getItem('test');
+          msg = jQuery.parseJSON(msg);
+          supersonic.ui.initialView.dismiss();
+        }
+        else{
+          alert("Login not successful. Double check your email and password and make sure you've linked your facebook account with it.")
+        }
       }
     });
   }

@@ -103,15 +103,11 @@ $(document).ready(function(){
         // alert(error_msg);
       },
       success: function(data) {
-        var message = {
-          content: data["access_token"]
-        };
-        supersonic.data.channel('public_announcements').publish(message);
 
         if (data['success'] == true) {
-
-          alert('This was a success');
-
+          alert("Sign up successful. We will now direct you to a page where you link Cupid with your facebook account");
+          supersonic.app.openURL("http://loveisintheair.herokuapp.com/signin");
+          alert("hit back and sign in after you've successfully linked your facebook account.");
         } else {
 
           $("#error-handler").remove();

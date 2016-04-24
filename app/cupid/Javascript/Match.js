@@ -1,6 +1,6 @@
-
-
 $(document).ready(function(){
+
+  // alert("come");
 
   //user data
   cur_usr_name = "";
@@ -45,45 +45,34 @@ $(document).ready(function(){
   refresh_token();
 
   function refresh_token() {
-    interval = setInterval(getData, 1000);
+    getData();
   }
 
   function getData() {
     message = localStorage.getItem('test');
     message = jQuery.parseJSON(message);
-    if (old_token == "" || old_token == message['access_token']) {
-      old_token = message['access_token'];
-    } else {
-      access_token = message['access_token'];
-      cur_usr_id = message['user_id'];
-      // alert(cur_usr_id);
-      // alert(access_token);
 
-      usr_data = {'user_id': cur_usr_id, 'match_id': false, 'yes': false, 'access_token': access_token};
-      usr_data = JSON.stringify(usr_data);
-      // alert(usr_data);
-      $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        dataType: "json",
-        url: "http://loveisintheair.herokuapp.com/api/votes",
-        data: usr_data,
-        error: function(er) {
-          var keys = Object.keys(er);
-          alert(er['status']);
-          clearInterval(interval);
-        },
-        success: function(data) {
-          alert("yes");
-          var keys = Object.keys(data);
-          match_id=data['match_id'];
-          alert(keys);
-          $(".user_name_1").html(data['users'][name]);
-          refreshMatchInfo(data);
-          clearInterval(interval);
-        }
-      });
-    }
+    access_token = message['access_token'];
+    cur_usr_id = message['user_id'];
+
+    usr_data = {'user_id': cur_usr_id, 'match_id': false, 'yes': false, 'access_token': access_token};
+    usr_data = JSON.stringify(usr_data);
+    // alert(usr_data);
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      dataType: "json",
+      url: "http://loveisintheair.herokuapp.com/api/votes",
+      data: usr_data,
+      error: function(er) {
+        alert(er['status']);
+        // clearInterval(interval);
+      },
+      success: function(data) {
+        // alert("yes");
+        refreshMatchInfo(data);
+      }
+    });
   }
 
   $(".test").click(function(){
@@ -102,7 +91,7 @@ $(document).ready(function(){
       // $(this).text("You swiped " + direction );
 
       if (direction === "left" || direction === "right") {
-        $('#swipe-directions').hide();
+        // $('#swipe-directions').hide();
         SubmitMatchVote(false);
       }
     }
@@ -130,8 +119,9 @@ $(document).ready(function(){
 
   function SubmitMatchVote(yes) {
 
-    usr_data = {'user_id': 1, 'match_id': match_id, 'yes': yes};
+    usr_data = {'user_id': cur_usr_id, 'match_id': match_id, 'yes': yes, 'access_token': access_token};
     usr_data = JSON.stringify(usr_data);
+    alert(yes);
     $.ajax({
       type: "POST",
       contentType: "application/json",
@@ -144,8 +134,11 @@ $(document).ready(function(){
       },
       success: function(data) {
         var keys = Object.keys(data);
+        // alert(data[])
+        // alert(yes);
         if (yes==true){
           doanimation(data);
+          // alert("matched");
         }else{
           refreshMatchInfo(data);
         }
@@ -163,29 +156,22 @@ $(document).ready(function(){
       user_img_1=data['users'][0]['profile_picture'];// profile picture url
       user_name_2=data['users'][1]['name'];
       user_img_2=data['users'][1]['profile_picture'];
-      alert(user_name_1);
-      alert(user_img_1);
-      alert(img_dire);
-      $(".user_img_1").attr("src", "icons/pig1.jpg");
-      // if(img_dire === true) {
-      //   $(".user_img_3").attr("src", user_img_1);
-      // } else {
-      //   $(".user_img_1").attr("src", user_img_1);
-      // }
-      alert("1");
+
+      if(img_dire === true) {
+        $(".user_img_3").attr("src", user_img_1);
+      } else {
+        $(".user_img_1").attr("src", user_img_1);
+      }
       if(img_dire === true) {
         $(".user_img_4").attr("src", user_img_2);
       } else {
         $(".user_img_2").attr("src", user_img_2);
       }
-      alert("2");
       $(".img_flip").flip(img_dire);
-      alert("3");
       img_dire = !img_dire;
       $(".user_name_1").html(user_name_1);
       $(".user_name_2").html(user_name_2);
       $(".cur_usr_name").html(cur_usr_name);
-      alert("4");
     }else{
       // if we ran out of matches
       ranOutOfMatches=true;
