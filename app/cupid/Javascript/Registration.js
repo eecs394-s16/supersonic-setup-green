@@ -105,32 +105,23 @@ $(document).ready(function(){
       success: function(data) {
 
         if (data['success'] == true) {
-          
           alert("Sign up successful. We will now direct you to a page where you link Cupid with your facebook account");
           supersonic.app.openURL("http://loveisintheair.herokuapp.com/signin");
-          alert("hit back and sign in after you've successfully linked your facebook account.")
-          
+          alert("hit back and sign in after you've successfully linked your facebook account.");
         } else {
-          
+
           $("#error-handler").remove();
           $('<div>', {id: "error-handler", style: "background-color:#F01644; opacity:0.7"}   ).insertAfter("#title");
-          
-          
+
+
           $.each(data['errors'],
 
                  function(index, error){
                   $("#error-handler").append( $('<p>', {text: error, style: "color:#FFFFFF"}) );
                  });
-  
+
         }
-        
-        
       }
     });
   });
-
-  // supersonic.ui.views.find("settingsView").then( function(startedView) {
-  //   supersonic.ui.layers.push(startedView);
-  // });
-
 });

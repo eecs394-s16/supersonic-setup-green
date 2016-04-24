@@ -1,19 +1,24 @@
-//user data
-cur_usr_name = "";
-cur_usr_id = "";
-user_img_1 = "";
-user_img_2 = "";
-user_name_1 = "";
-user_name_2 = "";
-user_id_1 = "";
-user_id_2 = "";
-match_id = false;
-vote = false;
-MyMatchPage = "";
-readyToMatch=true;//Set to true for now. If false, we cannot click the match button. That means either we have not received a new match yet or we're in animation stage.
-ranOutOfMatches=false;
+
 
 $(document).ready(function(){
+
+  //user data
+  cur_usr_name = "";
+  cur_usr_id = "";
+  user_img_1 = "";
+  user_img_2 = "";
+  user_name_1 = "";
+  user_name_2 = "";
+  user_id_1 = "";
+  user_id_2 = "";
+  match_id = false;
+  vote = false;
+  MyMatchPage = "";
+  readyToMatch=true;//Set to true for now. If false, we cannot click the match button. That means either we have not received a new match yet or we're in animation stage.
+  ranOutOfMatches=false;
+  access_token = "none";
+  old_token = "";
+  var interval;
 
   //css auto-adjust according to the screen size
   scr_height = $(window).height() - 44;
@@ -38,27 +43,57 @@ $(document).ready(function(){
 
   var img_dire = true;
 
-  // Get the first pair
-  // Specify match_id=false and yes=false to not be recorded by the votes
-  // and just get a new pair
-  usr_data = {'user_id': 1, 'match_id': false, 'yes': false};
-  usr_data = JSON.stringify(usr_data);
-  $.ajax({
-    type: "POST",
-    contentType: "application/json",
-    dataType: "json",
-    url: "http://loveisintheair.herokuapp.com/api/votes",
-    data: usr_data,
-    error: function(er) {
-      var keys = Object.keys(er);
-      // alert(er['status']);
-    },
-    success: function(data) {
-      var keys = Object.keys(data);
-      cur_usr_name=data['user_name'];
-      match_id=data['match_id'];
-      refreshMatchInfo(data);
+  refresh_token();
+
+  function refresh_token() {
+    interval = setInterval(getData, 1000);
+  }
+
+  function getData() {
+    message = localStorage.getItem('test');
+    message = jQuery.parseJSON(message);
+    if (old_token == "" || old_token == message['access_token']) {
+      old_token = message['access_token'];
+    } else {
+      access_token = message['access_token'];
+      cur_usr_id = message['user_id'];
+      alert(cur_usr_id);
+      alert(access_token);
+
+      usr_data = {'user_id': cur_usr_id, 'match_id': false, 'yes': false, 'access_token': access_token};
+      usr_data = JSON.stringify(usr_data);
+      alert(usr_data);
+      $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        url: "http://loveisintheair.herokuapp.com/api/votes",
+        data: usr_data,
+        error: function(er) {
+          var keys = Object.keys(er);
+          alert("no");
+          alert(er['status']);
+          clearInterval(interval);
+        },
+        success: function(data) {
+          alert("yes");
+          var keys = Object.keys(data);
+          match_id=data['match_id'];
+          refreshMatchInfo(data);
+          clearInterval(interval);
+        }
+      });
+      // alert("out");
+      return;
     }
+  }
+
+  $(".test").click(function(){
+    message = localStorage.getItem('test');
+    message = jQuery.parseJSON(message);
+    access_token = message['access_token'];
+    cur_usr_id = message['user_id'];
+    alert(access_token);
   });
 
   $(".img_flip").flip({});
@@ -74,7 +109,6 @@ $(document).ready(function(){
       }
     }
   });
-
 
   //event triger
   $(".user_1").click(function(){
@@ -196,4 +230,4 @@ $(document).ready(function(){
     });
   }
 
-})
+});
