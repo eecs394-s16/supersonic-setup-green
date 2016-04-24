@@ -107,6 +107,24 @@ $(document).ready(function(){
           content: data["access_token"]
         };
         supersonic.data.channel('public_announcements').publish(message);
+
+        if (data['success'] == true) {
+
+          alert('This was a success');
+
+        } else {
+
+          $("#error-handler").remove();
+          $('<div>', {id: "error-handler", style: "background-color:#F01644; opacity:0.7"}   ).insertAfter("#title");
+
+
+          $.each(data['errors'],
+
+                 function(index, error){
+                  $("#error-handler").append( $('<p>', {text: error, style: "color:#FFFFFF"}) );
+                 });
+
+        }
       }
     });
   });
