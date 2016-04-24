@@ -9,29 +9,14 @@ module.exports =
       id: "Match"
       location: "cupid#Match" # Supersonic module#view type navigation
     }
-    # {
-    #   title: "Geolocation"
-    #   id: "geolocation"
-    #   location: "geolocation#index"
-    # }
-    # {
-    #   title: "Settings"
-    #   id: "settings"
-    #   location: "example#settings"
-    # }
     {
       title: "MyMatch"
       id: "MyMatch"
       location: "cupid#MyMatch"
     }
-    # {
-    #   title: "Internet"
-    #   id: "internet"
-    #   location: "http://google.com" # URLs are supported!
-    # }
   ]
-  # rootView:
-  #   location: "superhero#index"
+  rootView:
+    location: "example#getting-started"
   # rootView:
   #   location: "example#getting-started"
 

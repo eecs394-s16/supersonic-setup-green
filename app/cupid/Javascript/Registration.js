@@ -104,17 +104,10 @@ $(document).ready(function(){
       },
       success: function(data) {
         var message = {
-          sender: "cupid#Login",
-          contet: data["access_token"]
+          content: data["access_token"]
         };
         supersonic.data.channel('public_announcements').publish(message);
-
       }
     });
   });
-
-  // supersonic.ui.views.find("settingsView").then( function(startedView) {
-  //   supersonic.ui.layers.push(startedView);
-  // });
-
 });
