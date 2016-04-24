@@ -36,16 +36,16 @@ function sendFBlogin() {
         var keys = Object.keys(er);
         // alert(keys);
         // // console.log(er);
-        // alert(er['error']);
+        alert(er['Error: Unable to log in']);
         // // alert(er['getAllResponseHeaders']);
         // // alert(er['status']);
         // alert('just dismissing the window and pretend it succeeded for now');
-      	supersonic.ui.initialView.dismiss();
+      	//supersonic.ui.initialView.dismiss();
       },
       success: function(data) {
       	// The form of data passed back will be:
       	supersonic.ui.initialView.dismiss();
-        alert("yes");
+        alert("You've logged in.");
       }
     });
   }
