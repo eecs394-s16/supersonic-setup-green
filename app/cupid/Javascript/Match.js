@@ -18,6 +18,7 @@ $(document).ready(function(){
   ranOutOfMatches=false;
   access_token = "none";
   old_token = "";
+  img_dire = true;
   var interval;
 
   //css auto-adjust according to the screen size
@@ -41,8 +42,6 @@ $(document).ready(function(){
   // $(".heart").css("margin-top", scr_height * 0.5 * 0.8);
   $(".name").css("margin-top", scr_width * 0.5);
 
-  var img_dire = true;
-
   refresh_token();
 
   function refresh_token() {
@@ -57,12 +56,12 @@ $(document).ready(function(){
     } else {
       access_token = message['access_token'];
       cur_usr_id = message['user_id'];
-      alert(cur_usr_id);
-      alert(access_token);
+      // alert(cur_usr_id);
+      // alert(access_token);
 
       usr_data = {'user_id': cur_usr_id, 'match_id': false, 'yes': false, 'access_token': access_token};
       usr_data = JSON.stringify(usr_data);
-      alert(usr_data);
+      // alert(usr_data);
       $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -71,7 +70,6 @@ $(document).ready(function(){
         data: usr_data,
         error: function(er) {
           var keys = Object.keys(er);
-          alert("no");
           alert(er['status']);
           clearInterval(interval);
         },
@@ -79,12 +77,12 @@ $(document).ready(function(){
           alert("yes");
           var keys = Object.keys(data);
           match_id=data['match_id'];
+          alert(keys);
+          $(".user_name_1").html(data['users'][name]);
           refreshMatchInfo(data);
           clearInterval(interval);
         }
       });
-      // alert("out");
-      return;
     }
   }
 
@@ -111,13 +109,6 @@ $(document).ready(function(){
   });
 
   //event triger
-  $(".user_1").click(function(){
-
-  });
-
-  $(".user_2").click(function(){
-
-  });
 
   $(".btn-checkmark").click(function(){
     if (readyToMatch){
@@ -163,6 +154,7 @@ $(document).ready(function(){
   }
 
   function refreshMatchInfo(data){
+
     cur_usr_name=data['user_name'];
     match_id=data['match_id'];
     if (match_id!=false){
@@ -171,22 +163,29 @@ $(document).ready(function(){
       user_img_1=data['users'][0]['profile_picture'];// profile picture url
       user_name_2=data['users'][1]['name'];
       user_img_2=data['users'][1]['profile_picture'];
-
-      if(img_dire === true) {
-        $(".user_img_3").attr("src", user_img_1);
-      } else {
-        $(".user_img_1").attr("src", user_img_1);
-      }
+      alert(user_name_1);
+      alert(user_img_1);
+      alert(img_dire);
+      $(".user_img_1").attr("src", "icons/pig1.jpg");
+      // if(img_dire === true) {
+      //   $(".user_img_3").attr("src", user_img_1);
+      // } else {
+      //   $(".user_img_1").attr("src", user_img_1);
+      // }
+      alert("1");
       if(img_dire === true) {
         $(".user_img_4").attr("src", user_img_2);
       } else {
         $(".user_img_2").attr("src", user_img_2);
       }
+      alert("2");
       $(".img_flip").flip(img_dire);
+      alert("3");
       img_dire = !img_dire;
       $(".user_name_1").html(user_name_1);
       $(".user_name_2").html(user_name_2);
       $(".cur_usr_name").html(cur_usr_name);
+      alert("4");
     }else{
       // if we ran out of matches
       ranOutOfMatches=true;

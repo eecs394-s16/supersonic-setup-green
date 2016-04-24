@@ -36,8 +36,8 @@ function sendFBlogin() {
           user_id: data['user_id'],
           access_token: data['access_token']
         };
-        alert(data['user_id']);
-        alert(data['access_token']);
+        // alert(data['user_id']);
+        // alert(data['access_token']);
         localStorage.setItem('test', JSON.stringify(message));
         var msg = localStorage.getItem('test');
         msg = jQuery.parseJSON(msg);
