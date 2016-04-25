@@ -40,9 +40,22 @@ function sendFBlogin() {
           var msg = localStorage.getItem('test');
           msg = jQuery.parseJSON(msg);
           supersonic.ui.initialView.dismiss();
+
+          login_errors=document.getElementById("login_errors");
+          login_errors.innerHTML="";
+          login_errors.visibility="hidden";
         }
         else{
-          alert("Login not successful. Double check your email and password and make sure you've linked your facebook account with it.")
+
+          login_errors=document.getElementById("login_errors");
+          if (data["error_msg"]){
+            //alert(data["error_msg"]);
+            login_errors.innerHTML=data["error_msg"];
+          }else{
+            //alert("Login not successful. Double check your email and password and make sure you've linked your facebook account with it."); 
+            login_errors.innerHTML="Login not successful. Double check your email and password.";
+          }
+          login_errors.visibility="visible";
         }
       }
     });
