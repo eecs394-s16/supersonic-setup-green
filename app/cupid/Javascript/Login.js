@@ -31,19 +31,23 @@ function sendFBlogin() {
       },
       success: function(data) {
         if (data["success"]==true){
-          var message = {
-            user_id: data['user_id'],
-            access_token: data['access_token']
-          };
+          if (data['fb_connected'] == false) {
+            alert('Please link with your facebook account first');
+          } else {
+            var message = {
+              user_id: data['user_id'],
+              access_token: data['access_token']
+            };
 
-          localStorage.setItem('test', JSON.stringify(message));
-          // var msg = localStorage.getItem('test');
-          // msg = jQuery.parseJSON(msg);
-          supersonic.ui.initialView.dismiss();
+            localStorage.setItem('test', JSON.stringify(message));
+            // var msg = localStorage.getItem('test');
+            // msg = jQuery.parseJSON(msg);
+            supersonic.ui.initialView.dismiss();
 
-          login_errors=document.getElementById("login_errors");
-          login_errors.innerHTML="";
-          login_errors.visibility="hidden";
+            login_errors=document.getElementById("login_errors");
+            login_errors.innerHTML="";
+            login_errors.visibility="hidden";
+          }
         }
         else{
 
@@ -52,7 +56,7 @@ function sendFBlogin() {
             //alert(data["error_msg"]);
             login_errors.innerHTML=data["error_msg"];
           }else{
-            //alert("Login not successful. Double check your email and password and make sure you've linked your facebook account with it."); 
+            //alert("Login not successful. Double check your email and password and make sure you've linked your facebook account with it.");
             login_errors.innerHTML="Login not successful. Double check your email and password.";
           }
           login_errors.visibility="visible";
