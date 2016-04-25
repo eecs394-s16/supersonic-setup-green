@@ -37,8 +37,8 @@ function sendFBlogin() {
           };
 
           localStorage.setItem('test', JSON.stringify(message));
-          var msg = localStorage.getItem('test');
-          msg = jQuery.parseJSON(msg);
+          // var msg = localStorage.getItem('test');
+          // msg = jQuery.parseJSON(msg);
           supersonic.ui.initialView.dismiss();
         }
         else{

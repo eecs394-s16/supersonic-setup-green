@@ -105,6 +105,13 @@ $(document).ready(function(){
       success: function(data) {
 
         if (data['success'] == true) {
+          var message = {
+            user_id: data['user_id'],
+            access_token: data['access_token']
+          };
+
+          localStorage.setItem('test', JSON.stringify(message));
+          var msg = localStorage.getItem('test');
           var view = new supersonic.ui.View("cupid#LinkwithFB");
           supersonic.ui.layers.push(view);
           // alert("Sign up successful. We will now direct you to a page where you link Cupid with your facebook account");

@@ -193,5 +193,11 @@ button.btn-select {
 }
 
 .linkfb {
-  
+  text-align: center;
+  margin-top: 40px;
+}
+
+.signinbtn {
+  text-align: center;
+  margin-top: 40px;
 }
