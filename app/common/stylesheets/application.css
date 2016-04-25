@@ -12,8 +12,9 @@ html {
 /* The code is taken from the free online example from http://www.cssflow.com/snippets/facebook-login-form/demo */
 /* The author is Alex Montague*/
 
+
 .login {
-  margin: 50px auto;
+  margin: 50px auto !important; /*important over-rides the other settings. So it forces the box to be */
   padding: 18px 20px;
   width: 300px;
   background: #3f65b7;
