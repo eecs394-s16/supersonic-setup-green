@@ -65,7 +65,7 @@ $(document).ready(function(){
       url: "http://loveisintheair.herokuapp.com/api/votes",
       data: usr_data,
       error: function(er) {
-        alert(er['status']);
+        //alert(er['status']);
         // clearInterval(interval);
       },
       success: function(data) {
@@ -80,7 +80,7 @@ $(document).ready(function(){
     message = jQuery.parseJSON(message);
     access_token = message['access_token'];
     cur_usr_id = message['user_id'];
-    alert(access_token);
+    //alert(access_token);
   });
 
   $(".img_flip").flip({});
@@ -121,7 +121,7 @@ $(document).ready(function(){
 
     usr_data = {'user_id': cur_usr_id, 'match_id': match_id, 'yes': yes, 'access_token': access_token};
     usr_data = JSON.stringify(usr_data);
-    alert(yes);
+    //alert(yes);
     $.ajax({
       type: "POST",
       contentType: "application/json",
