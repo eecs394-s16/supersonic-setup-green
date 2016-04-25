@@ -58,6 +58,8 @@ $(document).ready(function(){
     usr_data = {'user_id': cur_usr_id, 'match_id': false, 'yes': false, 'access_token': access_token};
     usr_data = JSON.stringify(usr_data);
     // alert(usr_data);
+    if (access_token == "none")
+      return;
     $.ajax({
       type: "POST",
       contentType: "application/json",
