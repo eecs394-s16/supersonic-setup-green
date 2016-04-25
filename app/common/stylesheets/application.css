@@ -181,3 +181,17 @@ button.btn-select {
 .heart_part {
   height: 100px;
 }
+
+.alertbox {
+  text-align: center;
+  padding: 20px 20px;
+  border: 3px solid blue;
+  border-radius: 40px;
+  margin-top: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.linkfb {
+  
+}

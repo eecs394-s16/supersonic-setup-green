@@ -105,9 +105,11 @@ $(document).ready(function(){
       success: function(data) {
 
         if (data['success'] == true) {
-          alert("Sign up successful. We will now direct you to a page where you link Cupid with your facebook account");
-          supersonic.app.openURL("http://loveisintheair.herokuapp.com/signin");
-          alert("hit back and sign in after you've successfully linked your facebook account.");
+          var view = new supersonic.ui.View("cupid#LinkwithFB");
+          supersonic.ui.layers.push(view);
+          // alert("Sign up successful. We will now direct you to a page where you link Cupid with your facebook account");
+          // alert("hit back and sign in after you've successfully linked your facebook account.");
+          // supersonic.app.openURL("http://loveisintheair.herokuapp.com/signin");
         } else {
 
           $("#error-handler").remove();
@@ -121,6 +123,7 @@ $(document).ready(function(){
                  });
 
         }
+
       }
     });
   });

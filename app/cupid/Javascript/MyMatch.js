@@ -6,7 +6,7 @@ $(document).ready(function(){
   message = jQuery.parseJSON(message);
   access_token = message['access_token'];
   cur_usr_id = message['user_id'];
-  usr_data = JSON.stringify({'user_id': cur_usr_id, 'access_token': access_token}); 
+  usr_data = JSON.stringify({'user_id': cur_usr_id, 'access_token': access_token});
 
   refresh_token();
 
@@ -89,7 +89,7 @@ $(document).ready(function(){
             + " people</strong> think you're a match!</p> <button class=\"button button-positive button-block btn-login\" onclick=\"fbLinkClick("+mymatch[i]["user_2_fb_id"]+")\">View Profile</button> </td>";
         }
       }
-      
+
     }
   });
 })
