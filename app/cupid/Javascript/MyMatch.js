@@ -92,7 +92,7 @@ $(document).ready(function(){
                 +"\"><figcaption style=\"position:relative;left:60px;\">"+ mymatch[i]["user_2_first_name"]+" "+ mymatch[i]["user_2_last_name"]+
                 "</figcaption></td>";
               cell2.innerHTML = "<td style=\"border-collapse: collapse;\"><p style=\"position:relative;bottom:30px;left:5px;\"><strong>"+ mymatch[i]["num_votes"]
-                + " people</strong> think you're a match!</p> <button class=\"button btn-fblink\" onclick=\"fbLinkClick("+mymatch[i]["user_2_fb_id"]+")\">View Profile</button> </td>";
+                + " people</strong> think you're a match!</p> <button class=\"button btn-fblink\" style=\"background-color: #E84C59;\" onclick=\"fbLinkClick("+mymatch[i]["user_2_fb_id"]+")\">View Profile</button> </td>";
             }
           }
         }

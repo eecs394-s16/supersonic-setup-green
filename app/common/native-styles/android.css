@@ -63,15 +63,28 @@ tab-bar tab-bar-item marker-top:selected {
   
   background-color: #E84C59;
   
-  
 }
 
 tab-bar-item#MyMatch {
+  width: 30%;
   background-image: url(icons/MyMatch.png);
   
   
 }
 
+
 tab-bar-item#Match {
   background-image: url(icons/Match.png);
 }
+
+
+tab-bar-item#Match:selected {
+  background-image: url(icons/red-Match.png);
+  
+}
+
+tab-bar-item#MyMatch:selected {
+  background-image: url(icons/red-MyMatch.png);
+}
+
+
