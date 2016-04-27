@@ -6,6 +6,20 @@ p {
 tr {
     border-bottom: 1em solid #ccc;
 }
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:100vh;
+  width:100vw;
+  overflow:auto;  
+  margin-top:20px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+#table-wrapper table {
+  width:100%;
+}
 </style>
 
 
@@ -34,22 +48,26 @@ tr {
         font-size: 11px;">Please get more friends to use Cupid!</p>
     <!-- <h3>This is how your match table will look like:</h3> -->
   </div>
-  <table style="width:100%; overflow: auto" id='myMatchTable'>
-<!--     <tr>
-      <td style="width:50%;border-collapse:collapse;"><img style="padding-left:5%;padding-top:5%;height:50%;width:90%;" src="/icons/download.jpeg">
-        <figcaption style="position:relative;left:60px;">The Cow</figcaption>
-      </td>
-      <td style="border-collapse: collapse;"><p style="position:relative;bottom:30px;left:5px;"><strong>9 people</strong> think you're a match!</p></td>
-      <tr>
-      <td style="width:50%;border-collapse:collapse;"><img style="padding-left:5%;padding-top:5%;height:50%;width:90%;" src="/icons/dog.jpeg">
-        <figcaption style="position:relative;left:60px;">The Dog</figcaption>
-      <td style="border-collapse: collapse;"><p style="position:relative;bottom:30px;left:5px;"><strong>5 people</strong> think you're a match!</p></td>
-      <tr>
-      <td style="width:50%;border-collapse:collapse;"><img style="padding-left:5%;padding-top:5%;height:50%;width:90%;" src="/icons/deadmeat.jpeg">
-        <figcaption style="position:relative;left:60px;">Dead Meat</figcaption>
-      <td style="border-collapse: collapse;"><p style="position:relative;bottom:30px;left:5px;"><strong>4 people</strong> think you're a match!</p></td>
-    </tr> -->
-  </table>
+  <div id="table-wrapper">
+    <div id="table-scroll">
+      <table style="margin:0px;padding:0px;width:100%; overflow: auto" id='myMatchTable'>
+        <tr>
+          <td style="width:50%;border-collapse:collapse;"><img style="padding-left:5%;padding-top:5%;height:50%;width:90%;" src="/icons/download.jpeg">
+            <figcaption style="position:relative;left:60px;">The Cow</figcaption>
+          </td>
+          <td style="border-collapse: collapse;"><p style="position:relative;bottom:30px;left:5px;"><strong>9 people</strong> think you're a match!</p></td>
+          <tr>
+          <td style="width:50%;border-collapse:collapse;"><img style="padding-left:5%;padding-top:5%;height:50%;width:90%;" src="/icons/dog.jpeg">
+            <figcaption style="position:relative;left:60px;">The Dog</figcaption>
+          <td style="border-collapse: collapse;"><p style="position:relative;bottom:30px;left:5px;"><strong>5 people</strong> think you're a match!</p></td>
+          <tr>
+          <td style="width:50%;border-collapse:collapse;"><img style="padding-left:5%;padding-top:5%;height:50%;width:90%;" src="/icons/deadmeat.jpeg">
+            <figcaption style="position:relative;left:60px;">Dead Meat</figcaption>
+          <td style="border-collapse: collapse;"><p style="position:relative;bottom:30px;left:5px;"><strong>4 people</strong> think you're a match!</p></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
 
 </div>

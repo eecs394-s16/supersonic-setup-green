@@ -5,12 +5,12 @@ module.exports =
   # See styling options for tabs and other native components in app/common/native-styles/ios.css or app/common/native-styles/android.css
   tabs: [
     {
-      title: "Match"
+      title: "Matchmaker"
       id: "Match"
       location: "cupid#Match" # Supersonic module#view type navigation
     }
     {
-      title: "MyMatch"
+      title: "My Matches"
       id: "MyMatch"
       location: "cupid#MyMatch"
     }
